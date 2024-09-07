@@ -1,0 +1,71 @@
+<mat-card class="card">
+  <mat-card-content style="margin-top:15px;">
+    <div class="search">
+      <mat-form-field floatLabel="auto" style="width: 500px; font-family: 'Times New Roman', Times, serif;">
+        <mat-label>Поиск</mat-label>
+        <input matInput appearance="none" (keyup.enter)="searchData()" [(ngModel)]="searchLine">
+      </mat-form-field>
+    </div>
+    <button class="searchButt" (click)="searchData()" mat-raised-button color="warn">Поиск</button>
+    <button class="moreButt" [disabled]="id == 0" (click)="openDetails()" mat-raised-button color="warn">Подробности</button>
+
+    <div style="margin-top: 10%;">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="font-family: 'Times New Roman', Times, serif;">
+
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef> № </th>
+          <td mat-cell *matCellDef="let element;"> {{dataSource.data.indexOf(element) + 1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Имя </th>
+          <td mat-cell *matCellDef="let element"> {{element.name + ' ' + element.surname + ' ' + element.lastname}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="birthDate">
+          <th mat-header-cell *matHeaderCellDef> Дата рождения </th>
+          <td mat-cell *matCellDef="let element"> {{element.birthDate | date:"dd.MM.yyyy"}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="faculty">
+          <th mat-header-cell *matHeaderCellDef> Факультет </th>
+          <td mat-cell *matCellDef="let element"> {{element.facultyName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="speciality">
+          <th mat-header-cell *matHeaderCellDef> Специальность </th>
+          <td mat-cell *matCellDef="let element"> {{element.specialityName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="group">
+          <th mat-header-cell *matHeaderCellDef> Группа </th>
+          <td mat-cell *matCellDef="let element"> {{element.groupName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="enrollDate">
+          <th mat-header-cell *matHeaderCellDef> Дата зачисления </th>
+          <td mat-cell *matCellDef="let element"> {{element.enrollDate | date:"dd.MM.yyyy"}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expulsionDate">
+          <th mat-header-cell *matHeaderCellDef> Дата отчисления </th>
+          <td mat-cell *matCellDef="let element"> {{element.expulsionDate == null ? '-' : element.expulsionDate | date:"dd.MM.yyyy"}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            (click)="id = this.dataSource.data[this.dataSource.data.indexOf(row)].studentId"
+            [style.background-color]="id == this.dataSource.data[this.dataSource.data.indexOf(row)].studentId ? '#ff7b5a' :'#424242'"></tr>
+      </table>
+      <br />
+      <mat-paginator [length]="this.dataSource.data.length"
+                     [pageSizeOptions]="[10, 5]"
+                     showFirstLastButtons
+                     aria-label="Select page">
+      </mat-paginator>
+    </div>
+    <button class="addButt" (click)="openDialog('add')" mat-raised-button color="warn">Добавить</button>
+    <button class="editButt" [disabled]="id == 0" (click)="openDialog('modify')" mat-raised-button color="warn">Редактировать</button>
+    <button class="delButt" [disabled]="id == 0" (click)="openDialog('delete')" mat-raised-button color="warn">Удалить</button>
+  </mat-card-content>
+</mat-card>

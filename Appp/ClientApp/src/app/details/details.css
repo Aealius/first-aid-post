@@ -1,0 +1,42 @@
+.card {
+  height: 100%;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-no {
+  width: 20px;
+  border-right: 1px solid rgb(224,224,224);
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: medium;
+}
+
+.mat-column-complaints {
+  padding-left: 16px;
+  border-right: 1px solid rgb(224,224,224);
+  font-size: medium;
+}
+
+.mat-column-diagnosis {
+  padding-left: 16px;
+  border-right: 1px solid rgb(224,224,224);
+  font-size: medium;
+}
+
+.mat-column-visitDate {
+  padding-left: 16px;
+  border-right: 1px solid rgb(224,224,224);
+  font-size: medium;
+}
+
+.mat-header-cell {
+  color: white;
+}
+
+.cdk-header-row {
+  background-color: rgb(244 67 54);
+}

@@ -1,0 +1,25 @@
+.card {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.input-class {
+  margin-right: 30%;
+  margin-left: 30%;
+  width: 40%;
+}
+
+.header {
+  width: 100%;
+}
+
+button {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100px;
+}
+
+h2 {
+  color:red;
+}

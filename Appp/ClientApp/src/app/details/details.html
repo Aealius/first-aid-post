@@ -1,0 +1,182 @@
+<mat-card class="card">
+  <mat-card-content style="margin-top:15px;">
+    <mat-tab-group [color]="'warn'" animationDuration="0ms">
+
+      <mat-tab label="Мед. карта">
+        <mat-form-field style="width:100%; margin-top: 10px;">
+          <mat-label>Вес</mat-label>
+          <input matInput disabled [(ngModel)]="weight" placeholder="Вес">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <mat-label>Рост</mat-label>
+          <input matInput disabled [(ngModel)]="height" placeholder="Рост">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <mat-label>Группа крови</mat-label>
+          <input matInput disabled [(ngModel)]="bloodTypeName" placeholder="Группа крови">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
+          <mat-label>Группа здоровья</mat-label>
+          <input matInput disabled [(ngModel)]="healthGroupName" placeholder="Группа здоровья">
+        </mat-form-field>
+      </mat-tab>
+
+      <mat-tab label="Посещение мед. пункта">
+        <div style="margin-top: 15px;">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="font-family: 'Times New Roman', Times, serif;">
+
+            <ng-container matColumnDef="no">
+              <th mat-header-cell *matHeaderCellDef> № </th>
+              <td mat-cell *matCellDef="let element;"> {{dataSource.data.indexOf(element) + 1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="complaints">
+              <th mat-header-cell *matHeaderCellDef> Жалобы </th>
+              <td mat-cell *matCellDef="let element"> {{element.complaints}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="diagnosis">
+              <th mat-header-cell *matHeaderCellDef> Диагноз </th>
+              <td mat-cell *matCellDef="let element"> {{element.diagnosis}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="visitDate">
+              <th mat-header-cell *matHeaderCellDef> Дата обращения </th>
+              <td mat-cell *matCellDef="let element"> {{element.visitDate | date:"dd.MM.yyyy"}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="id = this.dataSource.data[this.dataSource.data.indexOf(row)].medcardRecordId"
+                [style.background-color]="id == this.dataSource.data[this.dataSource.data.indexOf(row)].medcardRecordId ? '#ff7b5a' :'#424242'"></tr>
+          </table>
+          <br />
+          <mat-paginator [length]="this.dataSource.data.length"
+                         [pageSizeOptions]="[10, 5]"
+                         showFirstLastButtons
+                         aria-label="Select page">
+          </mat-paginator>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Мед. комиссии">
+        <div style="margin-top:15px;" *ngFor="let medexem of medexemData">
+          <mat-divider style="border-top-color: rgba(244, 67, 54, 1); border-top-width: 4px; "></mat-divider>
+          <mat-form-field style="width: 20%; margin-top: 10px;">
+            <mat-label>Год</mat-label>
+            <input matInput disabled [(ngModel)]="medexem.academicYear" placeholder="Год">
+          </mat-form-field>
+          <mat-form-field *ngIf="medexem.completanceStatus" style="width:40%;">
+            <mat-label>Пройдена</mat-label>
+            <input matInput disabled value="Пройдена" placeholder="Пройдена">
+          </mat-form-field>
+          <mat-form-field *ngIf="!medexem.completanceStatus" style="width:40%;">
+            <mat-label>Пройдена</mat-label>
+            <input matInput disabled value="Нет" placeholder="Пройдена">
+          </mat-form-field>
+          <mat-form-field style="width:40%;">
+            <mat-label>Причина отсутствия</mat-label>
+            <input matInput disabled [(ngModel)]="medexem.reason" placeholder="Причина отсутствия">
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Выписки">
+        <div style="margin-top:15px;" *ngFor="let excerptrecord of excerptrecordData">
+          <mat-divider style="border-top-color: rgba(244, 67, 54, 1); border-top-width: 4px; "></mat-divider>
+          <mat-form-field style="width: 20%; margin-top: 10px;">
+            <mat-label>Дата</mat-label>
+            <input matInput disabled [(ngModel)]="excerptrecord.date" placeholder="Дата">
+          </mat-form-field>
+          <mat-form-field style="width:80%;">
+            <mat-label>Текст</mat-label>
+            <input matInput disabled [(ngModel)]="excerptrecord.text" placeholder="Текст">
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Направления">
+        <div style="margin-top:15px;" *ngFor="let refferalrecord of refferalrecordData">
+          <mat-divider style="border-top-color: rgba(244, 67, 54, 1); border-top-width: 4px; "></mat-divider>
+          <mat-form-field style="width: 20%; margin-top: 10px;">
+            <mat-label>Дата</mat-label>
+            <input matInput disabled [(ngModel)]="refferalrecord.date" placeholder="Дата">
+          </mat-form-field>
+          <mat-form-field style="width:80%;">
+            <mat-label>Текст</mat-label>
+            <input matInput disabled [(ngModel)]="refferalrecord.text" placeholder="Текст">
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Прививки">
+        <div style="margin-top:15px;" *ngFor="let vactination of vactinationData">
+          <mat-divider style="border-top-color: rgba(244, 67, 54, 1); border-top-width: 4px; "></mat-divider>
+          <mat-form-field style="width: 15%; margin-top: 10px;">
+            <mat-label>Тип вакцины</mat-label>
+            <input matInput disabled [(ngModel)]="vactination.inoculation" placeholder="Тип вакцины">
+          </mat-form-field>
+          <mat-form-field style="width:15%;">
+            <mat-label>Вакцина</mat-label>
+            <input matInput disabled [(ngModel)]="vactination.vaccine" placeholder="Вакцина">
+          </mat-form-field>
+          <mat-form-field style="width:10%;">
+            <mat-label>Серия</mat-label>
+            <input matInput disabled [(ngModel)]="vactination.series" placeholder="Серия">
+          </mat-form-field>
+          <mat-form-field style="width:6%;">
+            <mat-label>Доза</mat-label>
+            <input matInput disabled [(ngModel)]="vactination.dose" placeholder="Доза">
+          </mat-form-field>
+          <mat-form-field style="width:13%;">
+            <mat-label>Способ введения</mat-label>
+            <input matInput disabled [(ngModel)]="vactination.immuneWay" placeholder="Способ введения">
+          </mat-form-field>
+          <mat-form-field style="width: 8%;">
+            <mat-label>Дата введения</mat-label>
+            <input matInput disabled [(ngModel)]="vactination.immuneDate" placeholder="Дата введения">
+          </mat-form-field>
+          <mat-form-field style="width: 18%;">
+            <mat-label>Реакция</mat-label>
+            <input matInput disabled [(ngModel)]="vactination.reactions" placeholder="Реакция">
+          </mat-form-field>
+          <mat-form-field style="width: 15%;">
+            <mat-label>Название инфекции</mat-label>
+            <input matInput disabled [(ngModel)]="vactination.infectionName" placeholder="Название инфекции">
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Справки">
+        <div style="margin-top:15px;" *ngFor="let certificate of certificatenData">
+          <mat-divider style="border-top-color: rgba(244, 67, 54, 1); border-top-width: 4px; "></mat-divider>
+          <mat-form-field style="width: 10%; margin-top: 10px;">
+            <mat-label>С даты</mat-label>
+            <input matInput disabled [(ngModel)]="certificate.fromDate" placeholder="С даты">
+          </mat-form-field>
+          <mat-form-field style="width: 10%; margin-top: 10px;">
+            <mat-label>По дату</mat-label>
+            <input matInput disabled [(ngModel)]="certificate.toDate" placeholder="По дату">
+          </mat-form-field>
+          <mat-form-field style="width:50%;">
+            <mat-label>Заметка</mat-label>
+            <input matInput disabled [(ngModel)]="certificate.note" placeholder="Заметка">
+          </mat-form-field>
+          <mat-form-field style="width:15%;">
+            <mat-label>Диагноз</mat-label>
+            <input matInput disabled [(ngModel)]="certificate.dianosis" placeholder="Диагноз">
+          </mat-form-field>
+          <mat-form-field style="width:15%;">
+            <mat-label>Врач</mat-label>
+            <input matInput disabled [(ngModel)]="certificate.doctorName" placeholder="Врач">
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="back()" color="warn">Назад</button>
+  </mat-card-actions>
+</mat-card>
+

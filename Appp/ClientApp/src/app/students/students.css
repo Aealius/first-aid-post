@@ -1,0 +1,116 @@
+table {
+  width: 100%;
+}
+
+body {
+  margin-top: 10%;
+}
+
+.mat-column-no {
+  width: 20px;
+  border-right: 1px solid rgb(224,224,224);
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: medium;
+}
+
+.mat-column-name {
+  padding-left: 16px;
+  border-right: 1px solid rgb(224,224,224);
+  font-size: medium;
+}
+
+.mat-column-birthDate {
+  padding-left: 16px;
+  border-right: 1px solid rgb(224,224,224);
+  font-size: medium;
+}
+
+.mat-column-faculty {
+  padding-left: 16px;
+  border-right: 1px solid rgb(224,224,224);
+  font-size: medium;
+}
+
+.mat-column-group {
+  padding-left: 16px;
+  border-right: 1px solid rgb(224,224,224);
+  font-size: medium;
+}
+
+.mat-column-speciality {
+  padding-left: 16px;
+  border-right: 1px solid rgb(224,224,224);
+  font-size: medium;
+}
+
+.mat-column-enrollDate {
+  padding-left: 16px;
+  border-right: 1px solid rgb(224,224,224);
+  font-size: medium;
+}
+
+.mat-column-expulsionDate {
+  padding-left: 16px;
+  border-right: 1px solid rgb(224,224,224);
+  font-size: medium;
+}
+
+.search {
+  position: absolute;
+  font-size: large;
+  left: 50px;
+  top: 5%;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.searchButt {
+  position: absolute;
+  left: 570px;
+  height: 40px;
+  width: 120px;
+  top: 5%;
+  margin-top: 11px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.moreButt {
+  position: absolute;
+  right: 20px;
+  height: 40px;
+  width: 120px;
+  top: 5%;
+  margin-top: 11px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.addButt {
+  margin-top: -80px;
+  margin-left: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.editButt {
+  margin-top: -80px;
+  margin-left: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.delButt {
+  margin-top: -80px;
+  margin-left: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.mat-header-cell {
+  color: white;
+}
+
+.cdk-header-row {
+  background-color: rgb(244, 67, 54);
+}
+
+.card {
+  height: 100%;
+  width: 100%;
+}
